@@ -14,7 +14,4 @@ plt.ylabel("Fraction Remaining")
 plt.title("Exponential Decay of C-14")
 plt.xlim(0, 28650)
 plt.yscale('log')  # Logarithmic scale for y-axis
-plt.grid(True)
 plt.show()
-
-
