@@ -1,27 +1,41 @@
 #!/usr/bin/env python3
-import numpy as nip
+"""
+101-the_whole_barn.py
 
-def np_slice(matrix: np.ndarray, axes: dict = {}) -> np.ndarray:
+Function to add two matrices of any dimension.
+
+If the shapes differ, returns None.
+"""
+
+def add_matrices(mat1, mat2):
     """
-    Slice a numpy ndarray along specified axes.
-
-    Args:
-        matrix (np.ndarray): The input matrix to slice.
-        axes (dict): A dictionary where keys are axis indices (int),
-                     and values are tuples representing slice parameters
-                     (start, stop, step).
-
-    Returns:
-        np.ndarray: The sliced matrix.
+    Adds two matrices element-wise and returns a new matrix.
     
-    Example:
-        >>> mat = np.array([[1, 2, 3], [4, 5, 6]])
-        >>> np_slice(mat, axes={1: (1, 3)})
-        array([[2, 3],
-               [5, 6]])
+    Args:
+        mat1 (list): First matrix (nested lists of ints/floats).
+        mat2 (list): Second matrix (nested lists of ints/floats).
+    
+    Returns:
+        list or None: New matrix after addition or None if shapes mismatch.
     """
-    # Prepare a slice object list for all axes
-    slices = [slice(None)] * matrix.ndim
-    for axis, slice_args in axes.items():
-        slices[axis] = slice(*slice_args)
-    return matrix[tuple(slices)]
+    # Check if both are lists
+    if not isinstance(mat1, list) or not isinstance(mat2, list):
+        # Base case: mat1 and mat2 are numbers, add them directly
+        if isinstance(mat1, (int, float)) and isinstance(mat2, (int, float)):
+            return mat1 + mat2
+        # Types don't match, shape mismatch
+        return None
+
+    # If lengths differ, shapes mismatch
+    if len(mat1) != len(mat2):
+        return None
+
+    # Recursive addition for each element
+    result = []
+    for a, b in zip(mat1, mat2):
+        summed = add_matrices(a, b)
+        if summed is None:  # Shape mismatch detected deeper
+            return None
+        result.append(summed)
+
+    return result
