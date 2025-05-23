@@ -2,25 +2,35 @@ import numpy as np
 
 def np_slice(matrix: np.ndarray, axes: dict = {}) -> np.ndarray:
     """
-    Slice a numpy ndarray along specified axes.
+    Slice a NumPy ndarray along specified axes.
 
-    Args:
-        matrix (np.ndarray): The input matrix to slice.
-        axes (dict): A dictionary where keys are axis indices (int),
-                     and values are tuples representing slice parameters
-                     (start, stop, step).
+    Parameters
+    ----------
+    matrix : np.ndarray
+        The input array to slice.
+    axes : dict, optional
+        A dictionary where keys are axis indices (int), and values are tuples
+        defining the slice parameters (start, stop, step) for that axis.
+        If step is omitted in the tuple, it defaults to None.
+        Defaults to an empty dict (no slicing).
 
-    Returns:
-        np.ndarray: The sliced matrix.
-    
-    Example:
-        >>> mat = np.array([[1, 2, 3], [4, 5, 6]])
-        >>> np_slice(mat, axes={1: (1, 3)})
-        array([[2, 3],
-               [5, 6]])
+    Returns
+    -------
+    np.ndarray
+        A new NumPy array sliced according to the specified axes.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> mat = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+    >>> np_slice(mat, axes={1: (1, 3)})
+    array([[2, 3],
+           [6, 7]])
     """
-    # Prepare a slice object list for all axes
-    slices = [slice(None)] * matrix.ndim
-    for axis, slice_args in axes.items():
-        slices[axis] = slice(*slice_args)
+    slices = []
+    for i in range(matrix.ndim):
+        if i in axes:
+            slices.append(slice(*axes[i]))
+        else:
+            slices.append(slice(None))
     return matrix[tuple(slices)]
