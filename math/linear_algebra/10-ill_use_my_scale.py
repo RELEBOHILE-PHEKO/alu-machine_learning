@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Module that defines a function to get the shape of a NumPy matrix.
+Module that scales a NumPy matrix by a scalar.
 """
+
 
 def np_shape(matrix):
     """
@@ -11,6 +12,6 @@ def np_shape(matrix):
         matrix (numpy.ndarray): The input matrix.
 
     Returns:
-        tuple: A tuple representing the shape of the matrix.
+        tuple: Shape of the matrix.
     """
     return matrix.shape
