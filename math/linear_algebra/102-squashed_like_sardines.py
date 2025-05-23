@@ -12,6 +12,7 @@ def shape(mat):
         return (0,)
     return (len(mat),) + shape(mat[0])
 
+
 def check_shapes_compatible(shape1, shape2, axis):
     """Check if two shapes are compatible for concatenation along axis."""
     if len(shape1) != len(shape2):
@@ -22,6 +23,7 @@ def check_shapes_compatible(shape1, shape2, axis):
         if shape1[i] != shape2[i]:
             return False
     return True
+
 
 def concat_axis(mat1, mat2, axis):
     """Concatenate two matrices along the given axis recursively."""
@@ -41,6 +43,7 @@ def concat_axis(mat1, mat2, axis):
             result.append(concatenated)
         return result
 
+
 def cat_matrices(mat1, mat2, axis=0):
     """
     Concatenate two matrices along a specific axis.
@@ -51,5 +54,4 @@ def cat_matrices(mat1, mat2, axis=0):
 
     if not check_shapes_compatible(shape1, shape2, axis):
         return None
-
     return concat_axis(mat1, mat2, axis)
