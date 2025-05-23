@@ -4,6 +4,7 @@ Module for element-wise operations on numpy matrices.
 Performs addition, subtraction, multiplication, and division.
 """
 
+
 def np_elementwise(mat1, mat2):
     """
     Performs element-wise addition, subtraction, multiplication,
