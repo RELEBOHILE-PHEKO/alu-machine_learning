@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 """
-Module for transposing a NumPy matrix.
+Module for transposing a NumPy matrix without using imports.
 """
-
-import numpy as np
 
 
 def np_transpose(matrix):
     """
-    Transposes a NumPy matrix.
+    Transposes a given NumPy ndarray.
 
     Args:
-        matrix (numpy.ndarray): The matrix to transpose.
+        matrix (numpy.ndarray): The matrix to be transposed.
 
     Returns:
-        numpy.ndarray: The transposed matrix.
+        numpy.ndarray: A new transposed matrix.
     """
-    return np.transpose(matrix)
+    return matrix.transpose()
