@@ -14,10 +14,11 @@ def matrix_shape(matrix):
 
     Returns:
         list: A list of integers representing the shape of the matrix.
-              For example, a 2D matrix with 3 rows and 4 columns returns [3, 4].
+              For example, a 2D matrix with 3 rows and 4 columns
+              returns [3, 4].
     """
     shape = []  # This will store the dimensions of the matrix
-    while isinstance(matrix, list):  # Keep going deeper while the current item is a list
-        shape.append(len(matrix))  # Add the size of the current level (e.g., rows, columns)
-        matrix = matrix[0]  # Move to the next inner list (e.g., matrix[0][0], etc.)
-    return shape  # Return the list of dimensions
+    while isinstance(matrix, list):  # Keep going deeper while matrix is a list
+        shape.append(len(matrix))  # Add current dimension length
+        matrix = matrix[0]  # Dive into the next nested level
+    return shape  # Return the shape list
