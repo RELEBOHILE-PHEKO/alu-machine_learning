@@ -1,31 +1,34 @@
 #!/usr/bin/env python3
+"""
+Module to slice a numpy ndarray along specified axes.
+"""
 
-def np_slice(matrix: np.ndarray, axes: dict = {}) -> np.ndarray:
+
+def np_slice(matrix, axes={}):
     """
-    Slice a NumPy ndarray along specified axes.
+    Slice a numpy.ndarray along specific axes.
 
     Parameters
     ----------
-    matrix : np.ndarray
+    matrix : numpy.ndarray
         The input array to slice.
     axes : dict, optional
-        A dictionary where keys are axis indices (int), and values are tuples
-        defining the slice parameters (start, stop, step) for that axis.
-        If step is omitted in the tuple, it defaults to None.
-        Defaults to an empty dict (no slicing).
+        A dictionary where the keys are axes (int), and the values are
+        tuples representing slice parameters (start, stop, step) for that axis.
+        Defaults to {} (no slicing).
 
     Returns
     -------
-    np.ndarray
-        A new NumPy array sliced according to the specified axes.
+    numpy.ndarray
+        A new sliced numpy ndarray according to the specified axes.
 
     Examples
     --------
     >>> import numpy as np
-    >>> mat = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+    >>> mat = np.array([[1, 2, 3], [4, 5, 6]])
     >>> np_slice(mat, axes={1: (1, 3)})
     array([[2, 3],
-           [6, 7]])
+           [5, 6]])
     """
     slices = []
     for i in range(matrix.ndim):
