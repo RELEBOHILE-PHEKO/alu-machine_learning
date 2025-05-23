@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
-def add_matrices2D(mat1, mat2):
-    # Check if both matrices have the same number of rows
-    if len(mat1) != len(mat2):
-        return None
+"""
+Module that contains a function to add two arrays element-wise.
+"""
 
-    # Check if all rows have the same length
-    for row1, row2 in zip(mat1, mat2):
-        if len(row1) != len(row2):
-            return None
 
-    # If dimensions match, perform element-wise addition
-    result = []
-    for row1, row2 in zip(mat1, mat2):
-        row_sum = [a + b for a, b in zip(row1, row2)]  # Add corresponding elements in each row
-        result.append(row_sum)
+def add_arrays(arr1, arr2):
+    """
+    Adds two arrays (lists) element-wise.
 
-    return result
+    Args:
+        arr1 (list): The first list of integers/floats.
+        arr2 (list): The second list of integers/floats.
 
+    Returns:
+        list or None: A list containing the sum of corresponding elements,
+                      or None if the input lists are not the same length.
+    """
+    if len(arr1) != len(arr2):
+        return None  # Return None if array lengths don't match
+
+    return [a + b for a, b in zip(arr1, arr2)]  # Element-wise addition
