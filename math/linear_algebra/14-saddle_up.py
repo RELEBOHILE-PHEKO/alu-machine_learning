@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
+"""
+Module for performing matrix multiplication on numpy ndarrays.
+"""
+
 import numpy as np
+
 
 def np_matmul(mat1, mat2):
     """
