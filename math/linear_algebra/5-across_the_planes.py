@@ -1,22 +1,36 @@
 #!/usr/bin/env python3
 """
-Module that contains a function to add two arrays element-wise.
+Module for performing element-wise addition of 2D matrices.
 """
 
 
-def add_arrays(arr1, arr2):
+def add_matrices2D(mat1, mat2):
     """
-    Adds two arrays (lists) element-wise.
+    Adds two 2D matrices element-wise.
 
     Args:
-        arr1 (list): The first list of integers/floats.
-        arr2 (list): The second list of integers/floats.
+        mat1 (list of lists of int/float): The first matrix.
+        mat2 (list of lists of int/float): The second matrix.
 
     Returns:
-        list or None: A list containing the sum of corresponding elements,
-                      or None if the input lists are not the same length.
+        list of lists of int/float: A new matrix representing the
+        element-wise sum of mat1 and mat2, or None if matrices are
+        not the same shape.
     """
-    if len(arr1) != len(arr2):
-        return None  # Return None if array lengths don't match
+    # Check if matrices have the same number of rows
+    if len(mat1) != len(mat2):
+        return None
 
-    return [a + b for a, b in zip(arr1, arr2)]  # Element-wise addition
+    # Check if all corresponding rows have the same length
+    for row1, row2 in zip(mat1, mat2):
+        if len(row1) != len(row2):
+            return None
+
+    # Perform element-wise addition
+    result = []
+    for row1, row2 in zip(mat1, mat2):
+        row_sum = [a + b for a, b in zip(row1, row2)]
+        result.append(row_sum)
+
+    return result
+
