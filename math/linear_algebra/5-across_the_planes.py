@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Module for performing element-wise addition of 2D matrices.
+Module for performing element-wise addition of 2D matrice.
 """
 
 
