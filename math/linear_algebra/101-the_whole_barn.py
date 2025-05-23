@@ -7,14 +7,15 @@ Function to add two matrices of any dimension.
 If the shapes differ, returns None.
 """
 
+
 def add_matrices(mat1, mat2):
     """
     Adds two matrices element-wise and returns a new matrix.
-    
+
     Args:
         mat1 (list): First matrix (nested lists of ints/floats).
         mat2 (list): Second matrix (nested lists of ints/floats).
-    
+
     Returns:
         list or None: New matrix after addition or None if shapes mismatch.
     """
