@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Module that contains a function to concatenate two matrices along a specified axis.
+Module that contains a function to concatenate two matrices 
+along a specified axis.
 """
 
 
@@ -14,7 +15,8 @@ def shape(mat):
 
 
 def check_shapes_compatible(shape1, shape2, axis):
-    """Check if two shapes are compatible for concatenation along axis."""
+    """Check if two shapes are compatible for concatenation along 
+    axis."""
     if len(shape1) != len(shape2):
         return False
     for i in range(len(shape1)):
