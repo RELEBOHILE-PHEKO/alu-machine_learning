@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Module that contains a function to concatenate two matrices along a specified axis.
+"""
+
 
 def shape(mat):
     """Return the shape of a nested list (matrix)."""
