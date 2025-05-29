@@ -14,6 +14,11 @@ def definiteness(matrix):
     - Negative definite
     - Negative semi-definite
     - Indefinite
+    Returns None if:
+    - matrix is not a numpy.ndarray
+    - matrix is not square
+    - matrix is empty
+    - matrix is not symmetric
     """
     if not isinstance(matrix, np.ndarray):
         raise TypeError("matrix must be a numpy.ndarray")
@@ -23,7 +28,10 @@ def definiteness(matrix):
             matrix.size == 0):
         return None
 
-    eigenvalues = np.linalg.eigvals(matrix)
+    if not np.allclose(matrix, matrix.T):
+        return None
+
+    eigenvalues = np.linalg.eigvalsh(matrix)  # safer for symmetric matrices
 
     if np.all(eigenvalues > 0):
         return "Positive definite"
