@@ -8,7 +8,10 @@ def minor(matrix, i, j):
     """
     Returns the minor of a matrix by removing the i-th row and j-th column.
     """
-    return [row[:j] + row[j + 1:] for idx, row in enumerate(matrix) if idx != i]
+    return [
+        row[:j] + row[j + 1:] 
+        for idx, row in enumerate(matrix) 
+        if idx != i]
 
 
 def determinant(matrix):
@@ -71,3 +74,4 @@ def adjugate(matrix):
 
     cof = cofactor(matrix)
     return transpose(cof)
+
