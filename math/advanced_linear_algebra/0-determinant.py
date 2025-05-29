@@ -16,7 +16,9 @@ def determinant(matrix):
         ValueError: If matrix is not square.
     """
     # Validate that it's a list of lists
-    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
+    if not isinstance(matrix, list) or not all(
+        isinstance(row, list) for row in matrix
+    ):
         raise TypeError("matrix must be a list of lists")
 
     # Check for 0x0 matrix (special case: [[]])
@@ -39,8 +41,9 @@ def determinant(matrix):
     det = 0
     for col in range(n):
         # Create submatrix (minor)
-        submatrix = [row[:col] + row[col+1:] for row in matrix[1:]]
+        submatrix = [row[:col] + row[col + 1:] for row in matrix[1:]]
         sign = (-1) ** col
         det += sign * matrix[0][col] * determinant(submatrix)
 
     return det
+
