@@ -46,4 +46,3 @@ def determinant(matrix):
         det += sign * matrix[0][col] * determinant(submatrix)
 
     return det
-
