@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Calculates the inverse of a square matrix using its adjugate and determinant.
+Calculates the inverse of a square matrix using its 
+adjugate and determinant.
 """
 
 adjugate = __import__('3-adjugate').adjugate
@@ -10,7 +11,9 @@ def minor(matrix, i, j):
     """
     Returns the minor matrix after removing row i and column j.
     """
-    return [row[:j] + row[j + 1:] for idx, row in enumerate(matrix) if idx != i]
+    return [
+     row[:j] + row[j + 1:] 
+     for idx, row in enumerate(matrix) if idx != i]
 
 
 def determinant(matrix):
