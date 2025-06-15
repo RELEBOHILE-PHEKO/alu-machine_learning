@@ -1,4 +1,5 @@
- a function that calculates the integral of a polynomial """
+#!/usr/bin/env python3
+""" defines  a function that calculates the integral of a polynomial """
 
 
 def poly_integral(poly, C=0):
