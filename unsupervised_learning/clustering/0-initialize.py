@@ -1,5 +1,7 @@
- #!/usr/bin/env python3
-"""this module contains the initialization of
+#!/usr/bin/env python3
+
+"""
+This module contains the initialization of
 the cluster centroids for k-means
 """
 
