@@ -38,30 +38,29 @@ def expectation(X, pi, m, S):
     n, d = X.shape
     k = pi.shape[0]
 
-    if m.shape[0] != k or m.shape[1] != d:
+    if m.shape != (k, d):
         return None, None
-    if S.shape[0] != k or S.shape[1] != d or S.shape[2] != d:
+    if S.shape != (k, d, d):
         return None, None
     if not np.isclose(np.sum(pi), 1):
         return None, None
 
-    # Calculate weighted likelihoods for each cluster
-    # g[i] = pi[i] * P(X | cluster i)
-    g = np.zeros((k, n))
+    # Calculate weighted likelihoods: pi[i] * P(X | cluster i)
+    likelihoods = np.zeros((k, n))
+    
     for i in range(k):
-        P_X_given_cluster = pdf(X, m[i], S[i])
-        if P_X_given_cluster is None:
+        P = pdf(X, m[i], S[i])
+        if P is None:
             return None, None
-        g[i] = pi[i] * P_X_given_cluster
+        likelihoods[i] = pi[i] * P
 
-    # Calculate marginal likelihood for each data point
-    # This is P(X) = sum over all clusters of pi[i] * P(X | cluster i)
-    marginal = np.sum(g, axis=0)
+    # Marginal likelihood P(X)
+    marginal = np.sum(likelihoods, axis=0)
 
-    # Calculate posterior probabilities (normalize)
-    g = g / marginal
+    # Posterior probabilities (responsibilities)
+    g = likelihoods / marginal
 
-    # Calculate total log likelihood
+    # Total log likelihood
     l = np.sum(np.log(marginal))
 
     return g, l
