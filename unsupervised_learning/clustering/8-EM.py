@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-'''
-Exoectation Maximization for a Gaussian Mixture Model
-'''
-
-
+"""Module for Expectation Maximization algorithm for a GMM"""
 import numpy as np
 initialize = __import__('4-initialize').initialize
 expectation = __import__('6-expectation').expectation
@@ -11,25 +7,67 @@ maximization = __import__('7-maximization').maximization
 
 
 def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
-    '''
-    Expectation maximization for a GMM
-    '''
-    if not isinstance(X, np.ndarray):
+    """Performs the expectation maximization for a GMM
+
+    Args:
+        X: numpy.ndarray of shape (n, d) containing the data set
+        k: positive integer containing the number of clusters
+        iterations: positive integer containing the maximum number of
+            iterations for the algorithm
+        tol: non-negative float containing tolerance of the log likelihood,
+            used to determine early stopping i.e. if the difference is less
+            than or equal to tol you should stop the algorithm
+        verbose: boolean that determines if you should print information
+            about the algorithm
+
+    Returns:
+        pi: numpy.ndarray of shape (k,) containing the priors for each
+            cluster
+        m: numpy.ndarray of shape (k, d) containing the centroid means
+            for each cluster
+        S: numpy.ndarray of shape (k, d, d) containing the covariance
+            matrices for each cluster
+        g: numpy.ndarray of shape (k, n) containing the probabilities
+            for each data point in each cluster
+        l: the log likelihood of the model
+        or None, None, None, None, None on failure
+    """
+    if not isinstance(X, np.ndarray) or X.ndim != 2:
         return None, None, None, None, None
-    if not isinstance(k, int):
+    if not isinstance(k, int) or k <= 0:
         return None, None, None, None, None
-    if not isinstance(iterations, int):
+    if not isinstance(iterations, int) or iterations <= 0:
         return None, None, None, None, None
-    if not isinstance(tol, float):
+    if not isinstance(tol, float) or tol < 0:
         return None, None, None, None, None
     if not isinstance(verbose, bool):
         return None, None, None, None, None
 
     pi, m, S = initialize(X, k)
-    g, l = expectation(X, pi, m, S)
+    if pi is None:
+        return None, None, None, None, None
+
+    l_prev = 0
     for i in range(iterations):
-        pi, m, S = maximization(X, g)
         g, l = expectation(X, pi, m, S)
+        if g is None:
+            return None, None, None, None, None
+
         if verbose and i % 10 == 0:
-            print(f"Log Likelihood after {i} iterations: {l:.5f}")
+            print("Log Likelihood after {} iterations: {}".format(
+                i, round(l, 5)))
+
+        if i > 0 and abs(l - l_prev) <= tol:
+            break
+
+        l_prev = l
+        pi, m, S = maximization(X, g)
+        if pi is None:
+            return None, None, None, None, None
+
+    g, l = expectation(X, pi, m, S)
+    if verbose:
+        print("Log Likelihood after {} iterations: {}".format(
+            i + 1, round(l, 5)))
+
     return pi, m, S, g, l
