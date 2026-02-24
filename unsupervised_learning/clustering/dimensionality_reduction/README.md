@@ -1,0 +1,1 @@
+Principal Component Analysis (PCA) is a dimensionality reduction technique used in data science to simplify large datasets by transforming numerous variables into fewer, uncorrelated "principal components" that retain maximum variance. It reduces complexity for faster machine learning, visualization, and noise filtering
