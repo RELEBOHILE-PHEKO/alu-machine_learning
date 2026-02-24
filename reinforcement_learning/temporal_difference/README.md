@@ -1,0 +1,1 @@
+Temporal Difference (TD) learning is a model-free RL method that updates value estimates incrementally after each step by "bootstrapping"—using current estimates to update future ones—rather than waiting for an episode to finish.
