@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"Regular Markov Chain"""
+"""Regular Markov Chain"""
 import numpy as np
 
 
@@ -12,13 +12,11 @@ def regular(P):
     n = P.shape[0]
     if P.shape[1] != n:
         return None
-    if not np.all(P > 0):
-        if not np.all(np.linalg.matrix_power(P, n * n) > 0):
-            return None
-    s = np.ones((1, n)) / n
-    for _ in range(1000):
-        s_next = np.matmul(s, P)
-        if np.allclose(s, s_next):
-            return s_next
-        s = s_next
-    return None
+    if not np.all(np.linalg.matrix_power(P, n * n) > 0):
+        return None
+
+    eigenvalues, eigenvectors = np.linalg.eig(P.T)
+    idx = np.argmin(np.abs(eigenvalues - 1))
+    steady = np.real(eigenvectors[:, idx])
+    steady = steady / steady.sum()
+    return steady.reshape(1, n)
