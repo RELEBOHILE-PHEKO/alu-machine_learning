@@ -28,4 +28,3 @@ def backward(Observation, Emission, Transition, Initial):
             Transition, B[:, t + 1] * Emission[:, Observation[t + 1]])
     P = np.sum(Initial[:, 0] * Emission[:, Observation[0]] * B[:, 0])
     return P, B
-
